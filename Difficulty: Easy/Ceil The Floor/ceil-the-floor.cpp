@@ -12,41 +12,26 @@ using namespace std;
 class Solution {
   public:
     vector<int> getFloorAndCeil(int x, vector<int> &arr) {
-        int low=0;
-        sort(arr.begin(),arr.end());
-        int high=arr.size()-1;
-        int floor=-1;
-        int ceil=-1;
-        while(low<=high){
-            int mid=(low+high)/2;
-            if(arr[mid]<=x){
-                low=mid+1;
-                floor=mid;
-            }else{
-                high=mid-1;
-            }
-        }
-        low=0;high=arr.size()-1;
-         while(low<=high){
-            int mid=(low+high)/2;
-            if(arr[mid]<x){
-                low=mid+1;
-            }else{
-                high=mid-1;
-                ceil=mid;
-            }
-        }
-        if(floor<0)
-        floor=-1;
-        else
-        floor=arr[floor];
-        
-        if(ceil>arr.size()-1){
-            ceil=-1;
-        }else{
-            ceil=arr[ceil];
-        }
-        return {floor,ceil};
+    int n = arr.size();
+      int fl = -1;
+      int ce = INT_MAX;
+      for(int i = 0; i<n; i++){
+          if(arr[i] ==x){
+              return {x,x};
+          }else{
+             if(arr[i] < x && fl <arr[i] ){
+                  fl = arr[i];
+              }
+              if(arr[i]>x && ce > arr[i]){
+                  ce = arr[i];
+              }
+          }
+
+      }
+      if(ce == INT_MAX){
+          ce = -1;
+      }
+      return {fl,ce};
     }
 };
 
